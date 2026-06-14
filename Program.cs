@@ -1,4 +1,8 @@
 using DashboardProject.Persistance.Context;
+using DashboardProject.Application.Services;
+using DashboardProject.Persistance.Repositories;
+using DashboardProject.Application.Interfaces.Repositories;
+using DashboardProject.Application.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,13 @@ builder.Services.AddDbContext<DashboardDbContext>(options =>
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddScoped<
+    IWeatherLocationRepository,
+    WeatherLocationRepository>();
+
+builder.Services.AddScoped<
+IWeatherLocationService,
+    WeatherLocationService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

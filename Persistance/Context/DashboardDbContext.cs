@@ -16,5 +16,13 @@ namespace DashboardProject.Persistance.Context
 
         public DbSet<StockWatch> StockWatches =>
             Set<StockWatch>();
-    }
+    
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DashboardDbContext).Assembly);
+        }
+}
 }
