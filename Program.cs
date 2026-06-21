@@ -3,7 +3,7 @@ using DashboardProject.Application.Interfaces.Services;
 using DashboardProject.Application.Services;
 using DashboardProject.Persistance.Context;
 using DashboardProject.Persistance.Repositories;
-using DashboardProject.Web.Components;
+using DashboardProject.Components;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

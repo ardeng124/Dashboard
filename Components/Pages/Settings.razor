@@ -1,8 +1,10 @@
 @page "/settings"
+@rendermode InteractiveServer
 @using DashboardProject.Domain.Entities
 @using DashboardProject.Application.Interfaces.Services
 @using Microsoft.AspNetCore.Components.Web
 @inject IWeatherLocationService Service
+@layout MainLayout
 <PageTitle> Settings </PageTitle>
 <h1> HI </h1>
 
@@ -41,6 +43,7 @@ Add
 
     private async Task AddLocation()
     {
+    Console.WriteLine("EEE");
         if (string.IsNullOrWhiteSpace(NewLocationName) || string.IsNullOrWhiteSpace(NewLocationCode))
         {
             return;
