@@ -31,7 +31,7 @@ namespace DashboardProject.Application.Services
             };
 
             await _repository.AddAsync(location);
-
+Console.WriteLine("HELP");
             await _repository.SaveChangesAsync();
         }
 

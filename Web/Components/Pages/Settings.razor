@@ -1,0 +1,66 @@
+@page "/settings"
+@using DashboardProject.Domain.Entities
+@using DashboardProject.Application.Interfaces.Services
+@using Microsoft.AspNetCore.Components.Web
+@inject IWeatherLocationService Service
+<PageTitle> Settings </PageTitle>
+<h1> HI </h1>
+
+<h3>Weather Locations</h3>
+
+<input @bind="NewLocationName" />
+<input @bind="NewLocationCode" />
+
+<button @onclick="AddLocation">
+Add
+</button>
+<ul>
+
+@foreach(var location in Locations)
+{
+    <li>
+        @location.Name
+
+        <button
+        @onclick="() => DeleteLocation(location.Id)">
+        Delete
+        </button>
+        </li>
+}
+
+</ul>
+@code{
+    private List<WeatherLocation> Locations = [];
+    private string NewLocationName = "";
+    private string NewLocationCode = "";
+    protected override async Task OnInitializedAsync() 
+    {
+        Locations =
+            await Service.GetAllAsync();
+    }
+
+    private async Task AddLocation()
+    {
+        if (string.IsNullOrWhiteSpace(NewLocationName) || string.IsNullOrWhiteSpace(NewLocationCode))
+        {
+            return;
+        }
+
+        await Service.AddAsync(
+                NewLocationName,
+                NewLocationCode);
+
+        Locations =
+            await Service.GetAllAsync();
+
+        NewLocationName = "";
+    }
+
+    private async Task DeleteLocation(Guid id)
+    {
+        await Service.DeleteAsync(id);
+
+        Locations =
+            await Service.GetAllAsync();
+    }
+}
